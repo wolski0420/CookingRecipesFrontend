@@ -1,0 +1,10 @@
+@font-face {
+  font-family: HighSpirited;
+  src: url(../../../assets/HighSpirited.ttf) format("opentype");
+
+}
+
+.title-font {
+  font-size: 150pt;
+  font-family: HighSpirited, serif;
+}

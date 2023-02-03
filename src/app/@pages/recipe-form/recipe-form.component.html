@@ -1,0 +1,60 @@
+<body>
+<app-navbar></app-navbar>
+
+<section>
+  <div class="container">
+    <div class="row justify-content-center text-center">
+      <h1 class="m-4">Stwórz nowy przepis</h1>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-4 align-items-center text-center">
+        <img class="card-img-top" [src]="imageSrcHtml" (error)="onImageSrcHtmlError()" alt="..." />
+      </div>
+
+      <div class="col-7 align-items-center">
+        <form [formGroup]="recipeForm" (ngSubmit) = "onSubmit()">
+          <div class="col-auto left-align">
+            <label for="name">Nazwa</label>
+            <div class="input-group mb-2">
+              <input required type="text" class="form-control" id="name" placeholder="Nazwa" name="name" formControlName="name">
+            </div>
+          </div>
+
+          <div class="col-auto left-align">
+            <label for="imageUrl">Link do zdjęcia</label>
+            <div class="input-group mb-2">
+              <input required type="text" class="form-control" id="imageUrl" placeholder="URL" name="imageUrl" formControlName="imageUrl">
+            </div>
+          </div>
+
+          <div class="col-auto left-align">
+            <label for="ingredients">Składniki</label>
+            <div formArrayName="ingredients" id="ingredients" class="container mb-2 my-0">
+              <div class="row p-1" *ngFor="let ingredient of ingredients.controls; let i = index">
+                <div class="col-10 p-0">
+                  <input id="ingredient-{{i+1}}" required type="text" class="form-control" placeholder="Składnik nr {{i+1}}" name="ingredient{{i+1}}" [formControlName]="i">
+                </div>
+
+                <button type="submit" class="col-2 btn btn-danger" (click)="deleteIngredient(i)">Usuń</button>
+              </div>
+
+              <button type="button" class="btn btn-success row mt-1" (click)="addIngredient()">Dodaj</button>
+            </div>
+          </div>
+
+          <div class="col-auto left-align">
+            <label for="description">Instrukcja wykonania</label>
+            <div class="input-group mb-2">
+              <textarea rows="6" required class="form-control" id="description" placeholder="Opis" name="description" formControlName="description"></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-dark" [disabled]="!recipeForm.valid">Utwórz</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
